@@ -14,6 +14,8 @@ export default function Home() {
     const [forecast, setForecast] = useState(null);
 
     useEffect(() => {
+        // update the page number 
+
         if (forecast) {
             let oneDay = 24 * 60 * 60 * 1000;
             let firstDate = new Date(); // 29th of Feb at noon your timezone
@@ -36,7 +38,7 @@ export default function Home() {
         setSpinner(true)
         let response
         try {
-            response = await axios.get(API_END_POINTS['getWeather'](city))
+            response = await axios.post(API_END_POINTS['getWeather'], {'city': city})
             if (response['status'] === 200) {
                 setForecast(response.data)
             }
@@ -67,12 +69,6 @@ export default function Home() {
         return aDate
     }
 
-
-    const getPage = () => {
-
-        return 0
-
-    }
 
     const resultsContainer = forecast ?
         <div className="results">

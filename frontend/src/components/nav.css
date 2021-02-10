@@ -16,7 +16,6 @@
 
 .nav-logo {
   height: 60px;
-  width: 60px;
 }
 
 .nav-logo:hover {
@@ -24,7 +23,7 @@
 }
 
 .nav-content {
-  max-width: 996px;
+  max-width: 768px;
   padding: 0rem 3rem;
   margin: 0 auto;
   display: flex;
@@ -58,7 +57,7 @@
 /* --------- Mobile Full Screen seetings ---------  */
 
 /* the 906px is an important size to remove a bug */
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 768px) {
   /* fadein (plus toggle) */
   .fullscreen {
     z-index: 1;

@@ -16,8 +16,8 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/" component={Home} />
         <Route path="/history" component={History} />
+        <Route path="/" component={Home} />
       </Switch>
     </Router>
   );

@@ -26,7 +26,7 @@ def logging(request):
 
 @method_decorator(ensure_csrf_cookie, name="dispatch")
 class GetCSRFToken(APIView):
-    """ Retrieve a CSFR token to be used on FORM in the frontend"""
+    """ Retrieve a CSFR token to be used in the frontend"""
 
     permission_classes = [
         permissions.AllowAny,
@@ -47,11 +47,15 @@ class ListSearchUserHistory(ListAPIView):
             anonymous_user=self.request.session.session_key
         )
 
-
-@api_view(["GET"])
-def get_weather(request, city):
+@api_view(["POST"])
+def get_weather(request):
     """ Calls the Weather API for the given city and return only the necessary data """
-
+    try:
+        city = request.data['city']
+    except:
+        return Response(
+            "Voce deve introduzir uma entrada 'city' com o nome da cidade", status=status.HTTP_400_BAD_REQUEST
+        )
     weather_data = util.weather_api(city)
     if weather_data["cod"] == "200":
         instance = UserSearchHistory(

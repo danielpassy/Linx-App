@@ -36,21 +36,22 @@ export default function NavBar() {
         // page should be the url to another route
 
         // it can only work while in mobile mode
-        if (document.body.clientWidth < 992) {
+        if (document.body.clientWidth < 768) {
             if (isIdle.current) {
                 setTransitioningIn(!transitionIn)
 
                 // if page is a stirng,
                 // i.e. if a url was passed, change page.
-                setTimeout(() => {
-                    if (typeof(page) == 'string') {
+                return setTimeout(() => {
+                    if (typeof (page) == 'string') {
                         changePage(page)
                     }
                 }, ANIMATION_TIMEOUT);
-
             }
         }
-
+        if (typeof (page) == 'string') {
+            changePage(page)
+        }
     }
 
     // There must be 4 states only:
@@ -101,7 +102,7 @@ export default function NavBar() {
     }
 
     return (
-        <nav className="nav navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="nav navbar navbar-expand-md navbar-light bg-light">
 
             {/* toggler  */}
             <img
@@ -132,7 +133,7 @@ export default function NavBar() {
                     >
                         <p
                             onClick={() => handleToggle('home')}
-                            className='p-3 smallText nav_item_mobile'
+                            className='m-3 smallText nav_item_mobile'
 
                         >
                             Home
@@ -141,7 +142,7 @@ export default function NavBar() {
                     <li className="nav-item">
                         <p
                             onClick={() => handleToggle('history')}
-                            className='p-3 smallText nav_item_mobile'
+                            className='m-3 smallText nav_item_mobile'
 
                         >
                             Histórico
