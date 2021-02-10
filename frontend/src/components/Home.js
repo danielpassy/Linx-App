@@ -4,6 +4,15 @@ import DatePicker from 'react-date-picker';
 import CSRF from './util/CSRF'
 import { API_END_POINTS, getHeaders } from './util/API'
 
+
+const maxDate = () => {
+    let aDate = new Date();
+    let forcastDays = 4;
+    aDate.setDate(aDate.getDate() + forcastDays);
+    return aDate
+}
+
+
 export default function Home() {
 
     const [city, setCity] = useState("");
@@ -20,7 +29,7 @@ export default function Home() {
             let oneDay = 24 * 60 * 60 * 1000;
             let firstDate = new Date(); // 29th of Feb at noon your timezone
             let secondDate = date; // 2st of March at noon
-            
+
             setPage(Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay))))
             console.log(Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay))))
         }
@@ -38,7 +47,7 @@ export default function Home() {
         setSpinner(true)
         let response
         try {
-            response = await axios.post(API_END_POINTS['getWeather'], {'city': city})
+            response = await axios.post(API_END_POINTS['getWeather'], { 'city': city })
             if (response['status'] === 200) {
                 setForecast(response.data)
             }
@@ -62,13 +71,6 @@ export default function Home() {
         {error}
     </div> : ""
 
-    const maxDate = () => {
-        let aDate = new Date();
-        let forcastDays = 4;
-        aDate.setDate(aDate.getDate() + forcastDays);
-        return aDate
-    }
-
 
     const resultsContainer = forecast ?
         <div className="results">
@@ -86,11 +88,12 @@ export default function Home() {
             </p>
             <div id="forecast">
                 <div className="subTitle">{(forecast['data'][page]['main']['temp'])} ºC</div>
-                <div className="image">{(forecast['data'][page]['weather'][0]['main'])}</div>
+                <div className="image">{(forecast['data'][page]['weather'][0]['description'])}</div>
                 <div className="precipitacao"></div>
             </div>
         </div>
         : ""
+
 
     return (
         <div id="home">

@@ -59,7 +59,7 @@ def get_weather(request):
     weather_data = util.weather_api(city)
     if weather_data["cod"] == "200":
         instance = UserSearchHistory(
-            anonymous_user=request.session.session_key, city=city, data=weather_data
+            anonymous_user=request.session.session_key, city=city, data=weather_data['data']
         )
         instance.save()
         return Response(weather_data, status=status.HTTP_200_OK)

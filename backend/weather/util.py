@@ -24,7 +24,7 @@ def weather_api(city):
 
     API_KEY = os.environ.get("API_KEY")
     r = requests.get(
-        f"https://api.openweathermap.org/data/2.5/forecast?q={city},BR&appid={API_KEY}&units=metric"
+        f"https://api.openweathermap.org/data/2.5/forecast?q={city},BR&appid={API_KEY}&units=metric&lang=Pt"
     )
     r = r.json()
     
