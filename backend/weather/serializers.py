@@ -11,7 +11,7 @@ class CitySerializer(serializers.Serializer):
 class UserSearchHistorySerializer(serializers.ModelSerializer):
     """ Serialize user Search History """
 
-    class meta:
+    class Meta:
         model = UserSearchHistory
         fields = ("timestamp", "city", "data")
         extra_kwargs = {
