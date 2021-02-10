@@ -141,7 +141,7 @@ export default function NavBar() {
                     </li>
                     <li className="nav-item">
                         <p
-                            onClick={() => handleToggle('history')}
+                            onClick={() => handleToggle('historico')}
                             className='m-3 smallText nav_item_mobile'
 
                         >

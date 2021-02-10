@@ -87,7 +87,7 @@ export default function Home() {
                 />
             </p>
             <div id="forecast">
-                <div className="subTitle">{(forecast['data'][page]['main']['temp'])} ºC</div>
+                <div className="subTitle">{(forecast['data'][page]['main']['temp']).toFixed(1)} ºC</div>
                 <div className="image">{(forecast['data'][page]['weather'][0]['description'])}</div>
                 <div className="precipitacao"></div>
             </div>
@@ -100,7 +100,7 @@ export default function Home() {
             <div className="container">
                 <div className='pt-3'>
                     <div className="row p-0 m-0">
-                        <div className="col-12 col-md-6">
+                        <div className="col-12 col-md-6 pb-3 mb-3">
                             <p className='title text-left'>
                                 Previsão do Tempo
                             </p>

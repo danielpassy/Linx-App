@@ -16,7 +16,7 @@ function App() {
     <Router>
       <Navbar />
       <Switch>
-        <Route path="/history" component={History} />
+        <Route path="/historico" component={History} />
         <Route path="/" component={Home} />
       </Switch>
     </Router>
