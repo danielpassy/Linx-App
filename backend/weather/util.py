@@ -16,13 +16,15 @@ def weather_api(city):
 
         extracted_data = {"cod": response["cod"], "city": response["city"], "data": []}
 
+
         for i in range(5):
+            # the key of the dictionary is the date and the value is the data 
             extracted_data["data"].append(response["list"][i * 8])
         return extracted_data
 
     API_KEY = os.environ.get("API_KEY")
     r = requests.get(
-        f"https://api.openweathermap.org/data/2.5/forecast?q={city},BR&appid={API_KEY}"
+        f"https://api.openweathermap.org/data/2.5/forecast?q={city},BR&appid={API_KEY}&units=metric"
     )
     r = r.json()
     

@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState, useEffect } from 'react'
 import axios from 'axios'
 import DatePicker from 'react-date-picker';
 import CSRF from './util/CSRF'
@@ -8,31 +8,75 @@ export default function Home() {
 
     const [city, setCity] = useState("");
     const [date, setDate] = useState(new Date())
-    const [error, setError] = useState(null);
+    const [page, setPage] = useState(0)
+    const [error, setError] = useState(false);
+    const [spinner, setSpinner] = useState(false)
     const [forecast, setForecast] = useState(null);
+
+    useEffect(() => {
+        if (forecast) {
+            let oneDay = 24 * 60 * 60 * 1000;
+            let firstDate = new Date(); // 29th of Feb at noon your timezone
+            let secondDate = date; // 2st of March at noon
+            
+            setPage(Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay))))
+            console.log(Math.round(Math.abs((firstDate.getTime() - secondDate.getTime()) / (oneDay))))
+        }
+
+    }, [forecast, date])
 
     function handleChange(event) {
         setCity(event.target.value);
     }
 
     async function submitForm() {
-        console.log(date)
-        let response = await axios.get(API_END_POINTS[city, date])
-        if (response['status'] === 200) {
-            setForecast(response.data)
+
+        // prevent submission without a City input
+        if (!city) { return }
+        setSpinner(true)
+        let response
+        try {
+            response = await axios.get(API_END_POINTS['getWeather'](city))
+            if (response['status'] === 200) {
+                setForecast(response.data)
+            }
         }
-        else if (response['status'] === 404) {
-            setError(response.error)
+        catch (err) {
+            console.log(err.response)
+            if (err.response['status'] === 400) {
+                setError(err.response.data)
+            }
         }
+        finally { setSpinner(false) }
     }
 
-    const errorContainer = error ? <div class="alert alert-danger" role="alert">
+    let spinnerContainer = spinner ? <div className="d-flex justify-content-center">
+        <div className="spinner-border" role="status">
+            <span className="sr-only">Loading...</span>
+        </div>
+    </div> : ""
+
+    let errorContainer = error ? <div className="alert alert-danger" role="alert">
         {error}
     </div> : ""
 
-    const results = forecast ? <div className="row">
-        <div className="col-12">
-            <spam className="d-inline-block text-left">
+    const maxDate = () => {
+        let aDate = new Date();
+        let forcastDays = 4;
+        aDate.setDate(aDate.getDate() + forcastDays);
+        return aDate
+    }
+
+
+    const getPage = () => {
+
+        return 0
+
+    }
+
+    const resultsContainer = forecast ?
+        <div className="results">
+            <p className="d-inline-block text-left">
                 <label for="city" className='mb-0'>Dia:</label>
                 <DatePicker
                     onChange={setDate}
@@ -40,10 +84,17 @@ export default function Home() {
                     className=' mr-3 d-block'
                     required={true}
                     locale={"pt-Br"}
+                    maxDate={maxDate()}
+                    minDate={new Date()}
                 />
-            </spam>
+            </p>
+            <div id="forecast">
+                <div className="subTitle">{(forecast['data'][page]['main']['temp'])} ºC</div>
+                <div className="image">{(forecast['data'][page]['weather'][0]['main'])}</div>
+                <div className="precipitacao"></div>
+            </div>
         </div>
-    </div> : ""
+        : ""
 
     return (
         <div id="home">
@@ -54,28 +105,41 @@ export default function Home() {
                             <p className='title text-left'>
                                 Previsão do Tempo
                             </p>
-                            <p className="subTitle text-left">Escolha uma city no Brasil</p>
+                            <p className="subTitle text-left">Escolha uma cidade brasileira</p>
                         </div>
                         <div className="col-12 col-md-6 pt-10vh">
                             {errorContainer}
-                            <form onSubmit={submitForm} method='post'>
+                            <form onSubmit={(e) => e.preventDefault()}>
                                 <CSRF />
                                 <span className="d-inline-block text-left">
                                     <label for="city" className='mb-0'>Cidade:</label>
-                                    <input type="text"
-                                        name="city"
-                                        id="city"
-                                        value={city}
-                                        onChange={(handleChange)}
-                                        className=' mr-3 d-block'
-                                        placeholder='Rio de Janeiro' />
+
+                                    <div className="input-group mb-3">
+                                        <div className="input-group-prepend">
+                                            <input type="text"
+                                                name="city"
+                                                id="city"
+                                                value={city}
+                                                onChange={(handleChange)}
+                                                className=' mr-3 d-block form-control'
+                                                placeholder='Rio de Janeiro'
+                                                aria-label="Default"
+                                                aria-describedby="inputGroup-sizing-default" />
+                                        </div>
+                                    </div>
                                 </span>
 
-                                <input type="button" className='m-3' onClick={submitForm} value="buscar" />
+                                <input type="button" className='m-3 btn btn-primary' onClick={submitForm} value="buscar" />
                             </form>
                         </div>
                     </div>
-                    {results}
+                    <div className="row">
+                        <div className="col-12">
+                            {spinnerContainer}
+                            {resultsContainer}
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
