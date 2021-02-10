@@ -17,6 +17,7 @@ import os
 # Load .env in development mode
 try:
     from dotenv import load_dotenv
+
     load_dotenv()
 except ImportError:
     pass
@@ -85,6 +86,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "rest_framework",
+    "weather",
 ]
 
 MIDDLEWARE = [
@@ -177,16 +180,19 @@ REST_FRAMEWORK = {
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
-        "DEFAULT_AUTHENTICATION_CLASSES": (
+    "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.BasicAuthentication",
     ),
-    
 }
 
-
 STATIC_URL = "/static/"
-STATICFILE_DIRS = (os.path.join(REACT_APP_DIR, "static"),)
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATICFILES_DIRS = [
+    os.path.join(REACT_APP_DIR),
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(STATIC_ROOT,'media')
 
 # overwride production configurations while in development
 if os.environ.get("DJANGO_DEVELOPMENT"):
