@@ -29,8 +29,8 @@ App criado para o desafio fullstack Linx juntamente a Edesoft
 - [X] Detalhamento do funcionamento
 - [X] Estrutura da aplicação
 - [X] Dependências
-- [ ] Motivo pelo escolha da dependência
-- [ ] Como executar a aplicação  
+- [X] Motivo pelo escolha da dependência
+- [X] Como executar a aplicação  
 
 Neste primeiro momentos utilizaremos sessions
 
