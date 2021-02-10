@@ -24,12 +24,19 @@ except ImportError:
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
+
+# Directory for the files genereted by React
 REACT_APP_DIR = os.path.join(BASE_DIR.parent, "frontend", "build")
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
+
+# Checks if API_KEY is setted up
+API_KEY = os.environ.get("API_KEY")
+if not (API_KEY):
+    raise Exception("You need to set API_KEY as an environmental variable")
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -191,8 +198,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATICFILES_DIRS = [
     os.path.join(REACT_APP_DIR),
 ]
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(STATIC_ROOT,'media')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(STATIC_ROOT, "media")
+
 
 # overwride production configurations while in development
 if os.environ.get("DJANGO_DEVELOPMENT"):

@@ -4,7 +4,7 @@ export const API_URL = "http://localhost:3000/api/v1/"
 export const API = {
     csfr: API_URL + 'csrf_token/',
     post: (method) => API_URL + `upload_${method}/`,
-    correct: API_URL + `correct/`
+    submit_city: API_URL + `correct/`
 }
 
 export function getHeaders() {
