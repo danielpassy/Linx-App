@@ -1,0 +1,15 @@
+.softOrange {
+    background-color: #F6AA3C;
+}
+
+body {
+    text-align: center;
+    
+}
+
+/* --------------------- HOME ------------------ */
+
+#home {
+    background-image: linear-gradient(to bottom, #F6AA3C, white);
+    min-height: 90vh;
+}

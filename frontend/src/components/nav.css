@@ -1,0 +1,149 @@
+.nav_item_mobile{
+  text-decoration: none !important;
+}
+.nav {
+  background-color: #fafafa;
+  position: sticky !important;
+  top: 0px;
+  width: 100%;
+  min-height: 10vh;
+  z-index: 1000;
+  box-shadow: 0 4px 14px 0 rgba(0, 0, 0, 0.15);
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+}
+
+.nav-logo {
+  height: 60px;
+  width: 60px;
+}
+
+.nav-logo:hover {
+  cursor: pointer;
+}
+
+.nav-content {
+  max-width: 996px;
+  padding: 0rem 3rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.nav-items {
+  margin-bottom: 0px !important;
+}
+
+.nav-item {
+  display: inline;
+  margin-left: 2rem;
+  color: #333;
+}
+.nav_item_mobile {
+  text-decoration: none;
+  color: black;
+  font-weight:300
+}
+
+.active {
+  color: #007bff !important;
+  background-color: transparent;
+}
+
+
+
+/* --------- Mobile Full Screen seetings ---------  */
+
+/* the 906px is an important size to remove a bug */
+@media screen and (max-width: 992px) {
+  /* fadein (plus toggle) */
+  .fullscreen {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    animation: fadeIn 0.8s forwards;
+  }
+  /* fadeout class */
+  .noscreen {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    animation: fadeOut 0.8s forwards;
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+    
+  }
+  .nav-content > ul {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    padding: 0;
+  }
+  /* the navbar while in android mode */
+  ul > li {
+    padding: 5vh;
+    color:white;
+
+  }
+
+  .nav_item_mobile{
+    font-weight:700 !important;
+    font-size:32px !important
+  }
+  .nav_item_mobile:not(.active){
+    color:white;
+    text-decoration: none;
+  }
+
+}
+
+/* menu full screen prop */
+
+
+.nav-item:hover, .nav-item > a:hover {
+  color: #007bff;
+  cursor: pointer;
+}
+/* -------- Toggler property -------- */
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    outline: 0;
+    
+}
+
+.close-icon{
+  width: 30px;
+  height: 30px;
+  display: grid;
+}
+
+#xIcon{
+  margin:auto;
+}
+
