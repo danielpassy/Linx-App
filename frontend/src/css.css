@@ -3,13 +3,49 @@
 }
 
 body {
-    text-align: center;
-    
+    text-align : center;
+    font-family: 'Nunito', sans-serif;
 }
+
+
+
+/* -------------- Fonts --------------------- */
+
+.title {
+    font-size  : 2.2em;
+    font-weight: 600;
+}
+
+.subTitle {
+    font-size: 1.2em;
+
+}
+@media screen and (min-width: 768px) {
+    .title {
+        font-size  : 3.1em;
+        font-weight: 600;
+    }
+    
+    .subTitle {
+        font-size: 1.6em;
+    
+    }
+
+}
+
+
+
+
 
 /* --------------------- HOME ------------------ */
 
 #home {
     background-image: linear-gradient(to bottom, #F6AA3C, white);
-    min-height: 85vh;
+    min-height      : 85vh;
+}
+
+@media screen and (min-width: 768px) {
+    .pt-10vh {
+        padding-top: 10vh;
+    }
 }

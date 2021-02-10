@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { API } from './API'
+import { API_END_POINTS } from './API'
 import axios from 'axios'
 
 const CSRFToken = () => {
@@ -23,7 +23,7 @@ const CSRFToken = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                await axios(API['csrf']);
+                await axios(API_END_POINTS['csrf']);
             } catch (err) {
 
             }
